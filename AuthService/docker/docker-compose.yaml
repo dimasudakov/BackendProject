@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  auth-service-db:
+    image: postgres:14-alpine
+    container_name: auth-service-db
+    restart: on-failure
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: sudakovdimapos
+      POSTGRES_DB: auth-service-db
+    ports:
+      - "6666:5432"
+    volumes:
+      - C:\Users\user\Desktop\data\auth-service-db:/var/lib/postgresql/data
+
+  auth-service-redis:
+    image: redis:7-alpine
+    container_name: auth-service-redis
+    ports:
+      - "7777:6379"
+
+  auth-service:
+    container_name: auth_service
+    ports:
+      - "8080:8080"
+
+    depends_on:
+      auth-service-db:
+        condition: service_started
+
+    environment:
+      DB_HOST: auth-service-db
+      DB_PORT: 5432
+      REDIS_HOST: auth-service-redis
+      REDIS_PORT: 6379
+      BET_SERVICE_HOST: bet-service
+      BET_SERVICE_PORT: 8081
+
+    build:
+      context: ../
+      dockerfile: Dockerfile

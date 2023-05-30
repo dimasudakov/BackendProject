@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: phone_number-or-email-is-not-null
+      author: Dima Sudakov
+      changes:
+        - sql:
+            sql: "ALTER TABLE user_accounts ADD CONSTRAINT phone_number_or_email_is_not_null CHECK (phone_number IS NOT NULL OR email IS NOT NULL);"

@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_users_table
+      author: Dima Sudakov
+      changes:
+        - createTable:
+            tableName: user_accounts
+            columns:
+              - column:
+                  name: user_id
+                  type: uuid
+                  defaultValueComputed: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(40)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(40)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(40)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: phone_number
+                  type: varchar(20)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: password
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_created
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_of_birth
+                  type: date
+                  constraints:
+                    nullable: false

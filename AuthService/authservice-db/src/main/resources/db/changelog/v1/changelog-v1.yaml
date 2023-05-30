@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - include: 
+      file: DDL/2023_04_17_1.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: DDL/2023_04_17_2.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: DDL/2023_04_18_1.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: DDL/2023_04_18_2.yaml
+      relativeToChangelogFile: true
+#  - include:
+#      file: DML/2023_04_18_1.yaml
+#      relativeToChangelogFile: true
+  - include:
+      file: DDL/2023_04_19_1.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: DDL/2023_05_11_1.yaml
+      relativeToChangelogFile: true

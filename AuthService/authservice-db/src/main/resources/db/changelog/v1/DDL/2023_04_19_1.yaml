@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: make_email_and_phone_unique
+      author: Dima Sudakov
+
+      changes:
+        - addUniqueConstraint:
+            tableName: user_accounts
+            columnNames: email
+
+        - addUniqueConstraint:
+            tableName: user_accounts
+            columnNames: phone_number

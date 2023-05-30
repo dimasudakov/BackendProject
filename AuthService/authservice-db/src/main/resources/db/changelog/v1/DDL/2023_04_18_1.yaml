@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-default-value-to-date_created
+      author: Dima Sudakov
+      changes:
+        - addDefaultValue:
+            tableName: user_accounts
+            columnName: date_created
+            columnDataType: TIMESTAMP WITHOUT TIME ZONE
+            defaultValueComputed: NOW()

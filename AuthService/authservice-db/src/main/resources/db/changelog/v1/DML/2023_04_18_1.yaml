@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: adding_users_into_user_accounts
+      author: Dima Sudakov
+      changes:
+        - sql:
+            sql:   "
+                    INSERT INTO user_accounts (first_name, last_name, email, phone_number, password, date_of_birth)
+                    VALUES ('Dima', 'Sudakov', 'dimas@gmail.com', '89046785957', '1234', '2003-07-09'),
+                           ('Вячеслав', 'Митрушин', 'animal@mil.ru', '89999999999', '4321', '2003-05-10'),
+                           ('Dora', 'Makarova', null, '89126669999', 'dora', '2000-02-15'),
+                           ('Vladimir', 'Putin', 'volodya_boss@president.ru', null, 'imperator', '1985-03-05'),
+                           ('Андрей', 'Pyrokinesis', 'andryshapiro@music.com', '666', 'pyro', '1997-04-20');
+                    
+                    INSERT INTO user_roles (user_id, role)
+                    VALUES ((SELECT user_id FROM user_accounts WHERE email = 'dimas@gmail.com'), '0'),
+                           ((SELECT user_id FROM user_accounts WHERE email = 'animal@mil.ru'), '1'),
+                           ((SELECT user_id FROM user_accounts WHERE phone_number = '89126669999'), '1'),
+                           ((SELECT user_id FROM user_accounts WHERE email = 'volodya_boss@president.ru'), '0'),
+                           ((SELECT user_id FROM user_accounts WHERE email = 'andryshapiro@music.com'), '1');
+                   "

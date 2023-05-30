@@ -1,0 +1,5 @@
+rootProject.name = 'AuthService'
+
+include ':authservice-api'
+include ':authservice-db'
+include ':authservice-impl'

@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: add_status_column_to_user_accounts
+      author: Dima Sudakov
+      changes:
+        - addColumn:
+            tableName: user_accounts
+            columns:
+              - column:
+                  name: status
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
