@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: createEventTable
+      author: Dima Sudakov
+      changes:
+        - createTable:
+            tableName: event
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: discipline_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: fk_event_discipline
+                    references: disciplines(id)
+              - column:
+                  name: country
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: city
+                  type: varchar(50)
+              - column:
+                  name: competition
+                  type: varchar(100)
+              - column:
+                  name: start_date
+                  type: timestamp with time zone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_active
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: competitor_1_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: fk_event_competitor_1
+                    references: competitor(id)
+              - column:
+                  name: competitor_2_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: fk_event_competitor_2
+                    references: competitor(id)

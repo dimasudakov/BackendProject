@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: createEventOutcomesTable
+      author: Dima Sudakov
+      changes:
+        - createTable:
+            tableName: event_outcomes
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: event_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: fk_event_outcomes_event
+                    references: event(id)
+              - column:
+                  name: outcome_type_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: fk_event_outcomes_outcome_type
+                    references: outcome_type(id)
+              - column:
+                  name: coefficient
+                  type: float
+                  constraints:
+                    nullable: false
+                    checkConstraint: 1.0 < coefficient AND coefficient < 100.0

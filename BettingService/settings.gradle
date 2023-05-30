@@ -1,0 +1,5 @@
+rootProject.name = 'BettingService'
+
+include ':betservice-api'
+include ':betservice-db'
+include ':betservice-impl'

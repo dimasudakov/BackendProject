@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: createBetsArchiveTable
+      author: Dima Sudakov
+      changes:
+        - createTable:
+            tableName: bets_archive
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: deal_archive_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: fk_bets_archive_deals_archive
+                    references: deals_archive(id)
+              - column:
+                  name: event_archive_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: fk_bets_archive_events_archive
+                    references: events_archive(id)
+              - column:
+                  name: coefficient
+                  type: float
+                  constraints:
+                    nullable: false
+                    checkConstraint: 1.0 < coefficient AND coefficient < 100.0
+              - column:
+                  name: outcome_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: fk_bets_archive_outcome_type
+                    references: outcome_type(id)

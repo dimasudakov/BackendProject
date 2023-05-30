@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: add_status_column_to_deals
+      author: Dima Sudakov
+      changes:
+        - addColumn:
+            tableName: deals
+            columns:
+              - column:
+                  name: status
+                  type: result_type

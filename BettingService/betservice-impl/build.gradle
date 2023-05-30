@@ -1,0 +1,79 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.0.5'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'dev.dima.betservice-impl'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    mapstructVersion = '1.5.5.Final'
+    lombokVersion = '1.18.26'
+    jwtVersion = '0.11.5'
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-validation:3.0.6'
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation group: 'org.springframework.security', name: 'spring-security-config', version: '6.0.2'
+
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'
+    implementation group: 'com.zaxxer', name: 'HikariCP', version: '5.0.1'
+    implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.21.1'
+    implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '3.0.5'
+    implementation group: 'org.hibernate.orm', name: 'hibernate-core', version: '6.2.1.Final'
+
+    implementation group: 'jakarta.persistence', name: 'jakarta.persistence-api', version: '3.1.0'
+
+    implementation 'org.springframework.boot:spring-boot-starter-validation:3.0.6'
+
+    implementation 'org.jetbrains:annotations:24.0.0'
+
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
+    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+
+    implementation group: 'org.springframework.boot', name: 'spring-boot-loader', version: '3.0.6'
+
+    implementation group: 'org.json', name: 'json', version: '20230227'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.1.0'
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-config:4.0.3'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:4.0.3'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:4.0.2'
+
+    //implementation project(':betservice-db')
+    implementation project(':betservice-api')
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs += [
+                    project(":betservice-db").sourceSets.main.resources
+            ]
+        }
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

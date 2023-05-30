@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: createTableOutcomeType
+      author: Dima Sudakov
+      changes:
+        - createTable:
+            tableName: outcome_type
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: type
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+

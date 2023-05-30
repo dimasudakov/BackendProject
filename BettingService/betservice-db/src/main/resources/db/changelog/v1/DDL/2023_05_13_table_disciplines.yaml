@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: createTableDisciplines
+      author: Dima Sudakov
+      changes:
+        - createTable:
+            tableName: disciplines
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false

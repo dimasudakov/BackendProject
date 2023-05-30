@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: createTableDeals
+      author: Dima Sudakov
+      changes:
+        - createTable:
+            tableName: deals
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: fk_deals_user
+                    references: user_accounts(id)
+              - column:
+                  name: type
+                  type: deal_type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: coefficient
+                  type: float
+                  constraints:
+                    nullable: false
+                    checkConstraint: 1.0 < coefficient AND coefficient < 500.0
+              - column:
+                  name: money
+                  type: float
+                  constraints:
+                    nullable: false
+                    checkConstraint: 10 < money AND money < 10000
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITHOUT TIME ZONE
+                  defaultValueComputed: NOW()
+                  constraints:
+                    nullable: false

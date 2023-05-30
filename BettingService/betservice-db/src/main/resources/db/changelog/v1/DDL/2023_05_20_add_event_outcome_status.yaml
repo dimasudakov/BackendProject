@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: add_status_column_to_event_outcomes
+      author: Dima Sudakov
+      changes:
+        - addColumn:
+            tableName: event_outcomes
+            columns:
+              - column:
+                  name: status
+                  type: result_type

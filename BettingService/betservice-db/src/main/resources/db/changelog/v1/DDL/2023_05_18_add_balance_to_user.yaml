@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: add_balance_column_to_user_accounts
+      author: Dima Sudakov
+      changes:
+        - addColumn:
+            tableName: user_accounts
+            columns:
+              - column:
+                  name: balance
+                  type: integer
+                  defaultValue: 100

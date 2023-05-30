@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user-table
+      author: your_name
+      changes:
+        - createTable:
+            tableName: user_accounts
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true

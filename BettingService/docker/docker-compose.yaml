@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+    bet-service-db:
+        image: postgres:14-alpine
+        container_name: bet-service-db
+        restart: on-failure
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: sudakovdimapos
+            POSTGRES_DB: bet-service-db
+        ports:
+            - "6667:5432"
+        volumes:
+            - C:\Users\user\Desktop\data\bet-service-db:/var/lib/postgresql/data
+
+    bet-service:
+        container_name: bet-service
+        ports:
+            - "8081:8081"
+
+        depends_on:
+            bet-service-db:
+                condition: service_started
+
+        environment:
+            DB_HOST: bet-service-db
+            DB_PORT: 5432
+
+        build:
+            context: ../
+            dockerfile: Dockerfile

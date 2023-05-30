@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id: createTableDealsArchive
+      author: Dima Sudakov
+      changes:
+        - createTable:
+            tableName: deals_archive
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: fk_deals_archive_user
+                    references: user_accounts(id)
+              - column:
+                  name: type
+                  type: deal_type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: coefficient
+                  type: float
+                  constraints:
+                    checkConstraint: 1.0 < coefficient AND coefficient < 500.0
+                    nullable: false
+              - column:
+                  name: money
+                  type: float
+                  constraints:
+                    checkConstraint: 10 < money AND money < 10000
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITHOUT TIME ZONE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: result
+                  type: result_type
+                  constraints:
+                    nullable: false
+
+

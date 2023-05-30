@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: createTableCompetitor
+      author: Dima Sudakov
+      changes:
+        - createTable:
+            tableName: competitor
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country
+                  type: varchar(50)
+              - column:
+                  name: discipline_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: fk_competitor_discipline
+                    references: disciplines(id)

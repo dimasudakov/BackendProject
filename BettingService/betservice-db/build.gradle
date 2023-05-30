@@ -1,0 +1,12 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+}
+
+group = 'dev.dima.betservice-db'
+version = '0.0.1-SNAPSHOT'
+
+bootJar {
+    enabled = false
+}

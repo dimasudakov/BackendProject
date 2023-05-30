@@ -1,0 +1,37 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: betting-service
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:6667}/bet-service-db?stringtype=unspecified
+    username: postgres
+    password: sudakovdimapos
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+
+jwt:
+  secret:
+    access:
+      key: qBTmv4oXFFR2GwjexDJ4t6fsIUIUhhXqlktXjXdkcyygs8nPVEwMfo29VDRRepYDVV5IkIxBMzr7OEHXEHd37w
+
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){magenta} %clr(%5p) %clr(---){faint}  %clr(%-40.40logger{39}){cyan} : %clr(%m){${LOG_COLOR}}%n"
+
+
+#logging:
+#  level:
+#    org.hibernate.SQL: DEBUG
+#    org.hibernate.type.descriptor.sql.BasicBinder: TRACE

@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: phone_number-or-email-is-not-null
+      author: Dima Sudakov
+      changes:
+        - sql:
+            sql: "CREATE TYPE result_type AS ENUM ('WIN', 'LOSE', 'RETURN');"
