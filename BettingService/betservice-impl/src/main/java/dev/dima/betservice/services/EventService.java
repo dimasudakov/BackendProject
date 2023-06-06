@@ -25,7 +25,7 @@ public interface EventService {
 
     ResponseEntity<EventResponse> updateEvent(UUID eventId, EventRequest event);
 
-    ResponseEntity<List<EventResponse>> getEventsByDisciplineId(UUID disciplineId, int page, int eventsPerPage);
+    ResponseEntity<List<EventResponse>> getEventsByDisciplineId(UUID disciplineId, LocalDate dateMin, LocalDate dateMax, int page, int eventsPerPage);
 
     ResponseEntity<List<EventResponse>> getEventsByDate(LocalDate dateMin, LocalDate dateMax, int page, int eventsPerPage);
 

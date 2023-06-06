@@ -47,4 +47,7 @@ databaseChangeLog:
   - include:
       file: DDL/2023_05_20_add_deal_status.yaml
       relativeToChangelogFile: true
+  - include:
+      file: DDL/2023_06_05_rename_column.yaml
+      relativeToChangelogFile: true
 

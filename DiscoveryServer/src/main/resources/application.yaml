@@ -6,3 +6,8 @@ eureka:
     fetch-registry: false
 server:
   port: 8761
+
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){magenta} %clr(%5p) %clr(---){faint}  %clr(%-40.40logger{39}){cyan} : %clr(%m){${LOG_COLOR}}%n"
+

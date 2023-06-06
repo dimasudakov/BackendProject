@@ -16,9 +16,6 @@ import java.util.UUID;
 @RequestMapping("/api/betting/manager")
 public interface EventsApi {
 
-//    @PostMapping("/events")
-//    ResponseEntity<EventResponse> createEvent(@RequestBody EventRequest event);
-
     @PostMapping("/events")
     ResponseEntity<EventResponse> createEvent(@Valid @RequestBody EventRequest2 event);
 
@@ -34,6 +31,8 @@ public interface EventsApi {
 
     @GetMapping("/events/by-discipline")
     ResponseEntity<List<EventResponse>> getEventsByDisciplineId(@RequestParam UUID disciplineId,
+                                                                @RequestParam(required = false) LocalDate dateMin,
+                                                                @RequestParam(required = false) LocalDate dateMax,
                                                                 @RequestParam(defaultValue = "1") int page,
                                                                 @RequestParam(defaultValue = "5") int eventsPerPage);
 

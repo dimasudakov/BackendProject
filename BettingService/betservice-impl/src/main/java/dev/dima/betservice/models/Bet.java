@@ -1,12 +1,11 @@
 package dev.dima.betservice.models;
 
+import dev.dima.betservice.models.base.BaseBet;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.UUID;
 
 @Entity
 @Table(name = "bets")
@@ -14,12 +13,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Bet {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private UUID id;
+public class Bet extends BaseBet {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "deal_id", nullable = false)
@@ -29,6 +23,4 @@ public class Bet {
     @JoinColumn(name = "outcome_id", nullable = false)
     private EventOutcome eventOutcome;
 
-    @Column(name = "coefficient")
-    private double coefficient;
 }

@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0
+      author: Dima Sudakov
+      changes:
+        - renameColumn:
+            tableName: deals_archive
+            oldColumnName: result
+            newColumnName: status
+            columnDataType: result_type

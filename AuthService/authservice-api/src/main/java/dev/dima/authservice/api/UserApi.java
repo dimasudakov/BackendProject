@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/auth")
 public interface UserApi {
 
-    @GetMapping("")
+    @GetMapping("/user")
     @ResponseStatus(HttpStatus.OK)
     ResponseEntity<UserResponse> getUser();
 }

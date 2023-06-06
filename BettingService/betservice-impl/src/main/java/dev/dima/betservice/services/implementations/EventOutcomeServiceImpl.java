@@ -9,6 +9,8 @@ import dev.dima.betservice.exceptions.NotFoundException;
 import dev.dima.betservice.exceptions.ReferencedEntityException;
 import dev.dima.betservice.exceptions.UnexpectedException;
 import dev.dima.betservice.models.*;
+import dev.dima.betservice.models.archive.ArchivedDeal;
+import dev.dima.betservice.repositories.DealArchiveRepository;
 import dev.dima.betservice.repositories.DealRepository;
 import dev.dima.betservice.repositories.EventOutcomeRepository;
 import dev.dima.betservice.services.EventOutcomeService;
@@ -30,6 +32,8 @@ public class EventOutcomeServiceImpl implements EventOutcomeService {
     private final EventOutcomeRepository eventOutcomeRepository;
 
     private final DealRepository dealRepository;
+
+    private final DealArchiveRepository dealArchiveRepository;
 
     private final EventOutcomeMapper eventOutcomeMapper;
 
@@ -104,28 +108,34 @@ public class EventOutcomeServiceImpl implements EventOutcomeService {
         List<Deal> deals = dealRepository.findDealsByOutcomeId(eventOutcomeId);
 
         for(Deal deal : deals) {
-            int status = 1;
+            ResultType status = ResultType.WIN;
 
             for(Bet bet : deal.getBets()) {
                 EventOutcome outcome = bet.getEventOutcome();
                 if(outcome.getStatus() == ResultType.LOSE) {
-                    status = -1;
+                    status = ResultType.LOSE;
                     break;
                 }
                 if(outcome.getStatus() == null) {
-                    status = 0;
+                    status = null;
                 }
             }
 
-            if(status == 1) {
-                deal.setStatus(ResultType.WIN);
+            // ставка зашла
+            if(status == ResultType.WIN) {
+                deal.setStatus(status);
                 User user = deal.getUser();
                 int profit = (int) (deal.getMoney() * deal.getCoefficient());
                 user.setBalance(user.getBalance() + profit);
-                dealRepository.save(deal);
+
+                ArchivedDeal archivedDeal = new ArchivedDeal(deal);
+                dealArchiveRepository.save(archivedDeal);
+                dealRepository.deleteById(deal.getId());
             }
-            if(status == -1) {
-                deal.setStatus(ResultType.LOSE);
+
+            // ставка проиграна
+            if(status == ResultType.LOSE) {
+                deal.setStatus(status);
                 dealRepository.save(deal);
             }
 

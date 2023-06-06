@@ -122,10 +122,17 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public ResponseEntity<List<EventResponse>> getEventsByDisciplineId(@NotNull UUID disciplineId, int page, int eventsPerPage) {
+    public ResponseEntity<List<EventResponse>> getEventsByDisciplineId(@NotNull UUID disciplineId,
+                                                                       @NotNull LocalDate dateMin,
+                                                                       @NotNull LocalDate dateMax,
+                                                                       int page,
+                                                                       int eventsPerPage) {
         Pageable pageable = PageRequest.of(page - 1, eventsPerPage, Sort.by("startDate").ascending());
 
-        Page<Event> events = eventRepository.findAllByDisciplineId(disciplineId, pageable);
+        LocalDateTime dateTimeMin = dateMin.atStartOfDay();
+        LocalDateTime dateTimeMax = dateMax.atTime(LocalTime.MAX);
+
+        Page<Event> events = eventRepository.findAllByDisciplineIdAndDateBetween(disciplineId, dateTimeMin, dateTimeMax, pageable);
 
         List<EventResponse> eventsResponse = events.getContent().stream()
                 .map(eventMapper::toResponse)

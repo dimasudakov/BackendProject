@@ -13,7 +13,7 @@ import java.util.UUID;
 @RequestMapping("/api/betting")
 public interface UserApi {
 
-    @PostMapping("/create-user")
+    @PostMapping("/user/create")
     ResponseEntity<String> createUser(@Valid @RequestBody UserRequest userRequest);
 
     @GetMapping("/user/balance")

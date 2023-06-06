@@ -1,10 +1,10 @@
 package dev.dima.betservice.services.implementations;
 
+import dev.dima.betservice.dtos.enums.ResultType;
 import dev.dima.betservice.dtos.requests.DealRequest;
+import dev.dima.betservice.dtos.requests.DealSellRequest;
 import dev.dima.betservice.dtos.responses.DealResponse;
-import dev.dima.betservice.exceptions.CoefficientChangedException;
-import dev.dima.betservice.exceptions.InsufficientFundsException;
-import dev.dima.betservice.exceptions.MultipleBetsOnSameEventException;
+import dev.dima.betservice.exceptions.*;
 import dev.dima.betservice.models.Bet;
 import dev.dima.betservice.models.Deal;
 import dev.dima.betservice.models.EventOutcome;
@@ -36,6 +36,8 @@ public class DealServiceImpl implements DealService {
     private final DealMapper dealMapper;
     private final IdEntityMapper idEntityMapper;
     private final BetMapper betMapper;
+
+    private static final double SALE_PRICE_FACTOR = 0.9;
 
     @Override
     public ResponseEntity<DealResponse> createDeal(@NotNull DealRequest dealRequest, @NotNull UUID userId) {
@@ -75,11 +77,6 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
-    public void sellDeal(@NotNull UUID dealId, @NotNull UUID userId) {
-
-    }
-
-    @Override
     public ResponseEntity<DealResponse> getDealById(@NotNull UUID dealId, @NotNull UUID userId) {
         return null;
     }
@@ -94,5 +91,59 @@ public class DealServiceImpl implements DealService {
         Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
         List<Deal> deals = dealRepository.findAllByUserId(userId, sort);
         return ResponseEntity.ok(dealMapper.toResponseList(deals));
+    }
+
+    @Override
+    public ResponseEntity<DealResponse> sellDealById(@NotNull UUID userId, @NotNull DealSellRequest dealSellRequest) {
+        Deal deal = dealRepository.findById(dealSellRequest.getDealId())
+                .orElseThrow(() -> new NotFoundException("Сделка не найдена"));
+
+        if(deal.getUser().getId() != userId) {
+            throw new NotFoundException("Сделка не найдена");
+        }
+        boolean hasStatusNotNull = deal.getBets().stream()
+                .anyMatch(bet -> bet.getEventOutcome().getStatus() != null);
+
+        if(hasStatusNotNull) {
+            throw new DealCantBeSoldException("Нельзя продать сделку так как есть рассчитанные ставки");
+        }
+
+        if(getSellingPrice(deal) != dealSellRequest.getPrice()) {
+            throw new CoefficientChangedException("Стоимость продажи сделки изменилась");
+        }
+
+        deal.setStatus(ResultType.RETURN);
+        dealRepository.save(deal);
+
+        return ResponseEntity.ok(dealMapper.toResponse(deal));
+    }
+
+    @Override
+    public ResponseEntity<Double> getDealSellingPrice(UUID userId, UUID dealId) {
+        Deal deal = dealRepository.findById(dealId)
+                .orElseThrow(() -> new NotFoundException("Сделка не найдена"));
+
+        if(deal.getUser().getId() != userId) {
+            throw new NotFoundException("Сделка не найдена");
+        }
+        boolean hasStatusNotNull = deal.getBets().stream()
+                .anyMatch(bet -> bet.getEventOutcome().getStatus() != null);
+
+        if(hasStatusNotNull) {
+            throw new DealCantBeSoldException("Нельзя продать сделку так как есть рассчитанные ставки");
+        }
+
+        return ResponseEntity.ok(getSellingPrice(deal));
+    }
+    private double getSellingPrice(Deal deal) {
+        double currentCoefficient = 1.0;
+        double initialCoefficient = 1.0;
+
+        for(Bet bet : deal.getBets()) {
+            initialCoefficient *= bet.getCoefficient();
+            currentCoefficient *= bet.getEventOutcome().getCoefficient();
+        }
+
+        return deal.getMoney() * (currentCoefficient / initialCoefficient) * SALE_PRICE_FACTOR;
     }
 }

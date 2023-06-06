@@ -22,11 +22,6 @@ public class EventsController implements EventsApi {
 
     private final EventService eventService;
 
-//    @Override
-//    public ResponseEntity<EventResponse> createEvent(EventRequest event) {
-//        return eventService.createEvent(event);
-//    }
-
 
     @Override
     @PreAuthorize("hasRole('ROLE_BETTING_MANAGER')")
@@ -52,8 +47,14 @@ public class EventsController implements EventsApi {
     }
 
     @Override
-    public ResponseEntity<List<EventResponse>> getEventsByDisciplineId(UUID disciplineId, int page, int eventsPerPage) {
-        return eventService.getEventsByDisciplineId(disciplineId, page, eventsPerPage);
+    public ResponseEntity<List<EventResponse>> getEventsByDisciplineId(UUID disciplineId, LocalDate dateMin, LocalDate dateMax, int page, int eventsPerPage) {
+        if(dateMin == null) {
+            dateMin = LocalDate.now();
+        }
+        if(dateMax == null) {
+            dateMax = LocalDate.of(2100, 1, 1);
+        }
+        return eventService.getEventsByDisciplineId(disciplineId, dateMin, dateMax, page, eventsPerPage);
     }
 
     @Override

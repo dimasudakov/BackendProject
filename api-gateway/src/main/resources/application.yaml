@@ -1,0 +1,40 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        # authentication service
+        - id: authentication_route
+          uri: lb://authentication-service
+          predicates:
+            - Path=/auth/**
+          filters:
+            - RewritePath=/auth/(?<remaining>.*), /api/auth/${remaining}
+        # betting service
+        - id: betting_route
+          uri: lb://betting-service
+          predicates:
+            - Path=/betting/**
+          filters:
+            - RewritePath=/betting/(?<remaining>.*), /api/betting/${remaining}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+logging:
+  pattern:
+    level:
+      org:
+        zalando:
+          logbook: TRACE
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){magenta} %clr(%5p) %clr(---){faint}  %clr(%-40.40logger{39}){cyan} : %clr(%m){${LOG_COLOR}}%n"
+

@@ -2,6 +2,7 @@ package dev.dima.betservice.controllers.User;
 
 import dev.dima.betservice.api.User.DealsApi;
 import dev.dima.betservice.dtos.requests.DealRequest;
+import dev.dima.betservice.dtos.requests.DealSellRequest;
 import dev.dima.betservice.dtos.responses.DealResponse;
 import dev.dima.betservice.services.DealService;
 import jakarta.validation.Valid;
@@ -29,5 +30,15 @@ public class DealsController implements DealsApi {
     @Override
     public ResponseEntity<List<DealResponse>> getDealsById(UUID userId) {
         return dealService.getDealsByUserId(userId);
+    }
+
+    @Override
+    public ResponseEntity<Double> getDealSellingPrice(UUID userId, UUID dealId) {
+        return dealService.getDealSellingPrice(userId, dealId);
+    }
+
+    @Override
+    public ResponseEntity<DealResponse> sellDeal(UUID userId, DealSellRequest dealSellRequest) {
+        return dealService.sellDealById(userId, dealSellRequest);
     }
 }
