@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.26/8f8cf0372abf564913e9796623aac4c8ea44025a/lombok-1.18.26.jar" />
+        </processorPath>
+        <module name="BettingService.betservice-api.main" />
+      </profile>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok-mapstruct-binding/0.2.0/2f1cf9ced7b720ba4996c942b816669e63f0fa4f/lombok-mapstruct-binding-0.2.0.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mapstruct/mapstruct-processor/1.5.5.Final/897f6f115930b936287bef552bf5fe28cc64717d/mapstruct-processor-1.5.5.Final.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.26/8f8cf0372abf564913e9796623aac4c8ea44025a/lombok-1.18.26.jar" />
+        </processorPath>
+        <module name="BettingService.betservice-impl.main" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="AuthService1.main" target="18" />
+      <module name="AuthService1.test" target="18" />
+      <module name="BetService" target="17" />
+      <module name="BetService.betservice-api" target="17" />
+      <module name="BetService.betservice-api.main" target="17" />
+      <module name="BetService.betservice-api.test" target="17" />
+      <module name="BetService.betservice-db" target="18" />
+      <module name="BetService.betservice-db.main" target="18" />
+      <module name="BetService.betservice-db.test" target="18" />
+      <module name="BetService.betservice-impl" target="17" />
+      <module name="BetService.betservice-impl.main" target="17" />
+      <module name="BetService.betservice-impl.test" target="17" />
+      <module name="BetService.main" target="17" />
+      <module name="BetService.test" target="17" />
+      <module name="BettingService1.main" target="18" />
+      <module name="BettingService1.test" target="18" />
+      <module name="ORIS" target="17" />
+      <module name="ORIS.api-gateway" target="17" />
+      <module name="ORIS.api-gateway.main" target="17" />
+      <module name="ORIS.api-gateway.test" target="17" />
+      <module name="ORIS.AuthService" target="17" />
+      <module name="ORIS.AuthService.main" target="17" />
+      <module name="ORIS.AuthService.test" target="17" />
+      <module name="ORIS.BettingService" target="17" />
+      <module name="ORIS.BettingService.main" target="17" />
+      <module name="ORIS.BettingService.test" target="17" />
+      <module name="ORIS.DiscoveryServer" target="17" />
+      <module name="ORIS.DiscoveryServer.main" target="17" />
+      <module name="ORIS.DiscoveryServer.test" target="17" />
+      <module name="ORIS.main" target="17" />
+      <module name="ORIS.test" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

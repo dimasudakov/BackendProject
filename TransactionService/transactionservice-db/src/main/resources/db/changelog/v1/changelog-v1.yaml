@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: DDL/2023_06_06_type_transaction_type.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: DDL/2023_06_01_table_user.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: DDL/2023_06_01_table_linked_cards.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: DDL/2023_06_06_table_transaction_history.yaml
+      relativeToChangelogFile: true

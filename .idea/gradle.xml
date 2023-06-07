@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/AuthService" />
+        <option name="gradleJvm" value="openjdk-18" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/AuthService" />
+            <option value="$PROJECT_DIR$/AuthService/authservice-api" />
+            <option value="$PROJECT_DIR$/AuthService/authservice-db" />
+            <option value="$PROJECT_DIR$/AuthService/authservice-impl" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/BettingService" />
+        <option name="gradleJvm" value="openjdk-18" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/BettingService" />
+            <option value="$PROJECT_DIR$/BettingService/betservice-api" />
+            <option value="$PROJECT_DIR$/BettingService/betservice-db" />
+            <option value="$PROJECT_DIR$/BettingService/betservice-impl" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/DiscoveryServer" />
+        <option name="gradleJvm" value="openjdk-18" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/DiscoveryServer" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/api-gateway" />
+        <option name="gradleJvm" value="openjdk-18" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/api-gateway" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

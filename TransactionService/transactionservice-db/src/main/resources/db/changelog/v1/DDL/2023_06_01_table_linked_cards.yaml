@@ -1,0 +1,49 @@
+databaseChangeLog:
+  - changeSet:
+      id: createTableLinkedCards
+      author: Dima Sudakov
+      changes:
+        - createTable:
+            tableName: linked_cards
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: fk_linked_cards_user
+                    references: user_accounts(id)
+              - column:
+                  name: card_number
+                  type: varchar(16)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cardholder_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expiration_month
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expiration_year
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: card_type
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cvv_code
+                  type: varchar(100)
+                  constraints:
+                    nullable: false

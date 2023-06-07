@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/authservice-api/AuthService.authservice-api.main.iml" filepath="$PROJECT_DIR$/.idea/modules/authservice-api/AuthService.authservice-api.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/authservice-impl/AuthService.authservice-impl.main.iml" filepath="$PROJECT_DIR$/.idea/modules/authservice-impl/AuthService.authservice-impl.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/betservice-api/BettingService.betservice-api.main.iml" filepath="$PROJECT_DIR$/.idea/modules/betservice-api/BettingService.betservice-api.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/betservice-impl/BettingService.betservice-impl.main.iml" filepath="$PROJECT_DIR$/.idea/modules/betservice-impl/BettingService.betservice-impl.main.iml" />
+    </modules>
+  </component>
+</project>

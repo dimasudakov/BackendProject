@@ -1,0 +1,6 @@
+rootProject.name = 'TransactionService'
+
+include ':transactionservice-api'
+include ':transactionservice-db'
+include ':transactionservice-impl'
+

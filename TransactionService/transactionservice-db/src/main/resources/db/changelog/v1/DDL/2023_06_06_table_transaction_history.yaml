@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: createTransactionHistoryTable
+      author: Dima Sudakov
+      changes:
+        - createTable:
+            tableName: transaction_history
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: fk_user_id
+                    references: user_accounts(id)
+              - column:
+                  name: transaction_amount
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: transaction_type
+                  constraints:
+                    nullable: false

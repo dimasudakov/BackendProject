@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_transaction_type
+      author: Dima Sudakov
+      changes:
+        - sql:
+            sql: "CREATE TYPE transaction_type AS ENUM ('REPLENISHMENT', 'EXTRACT', 'DEAL');"

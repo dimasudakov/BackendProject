@@ -35,6 +35,9 @@ public class AuthServiceImpl implements AuthService{
     private final JwtTokenRedisRepository redisRepository;
     private final JwtProvider jwtProvider;
 
+    private final String BET_SERVICE_URL = "http://bet-service:8081/api/betting/user/create";
+    private final String TRANSACTION_SERVICE_URL = "http://transaction-service:8082/api/transaction/user/create";
+
     public void register(@NonNull @Valid UserRequest userDto) {
         UserEntity userEntity = userMapper.toEntity(userDto);
 
@@ -52,7 +55,8 @@ public class AuthServiceImpl implements AuthService{
         userEntity = userService.createUser(userEntity)
                 .orElseThrow(UnexpectedException::new);
         try {
-            createUserInBetService(userEntity);
+            createUserInAnotherService(userEntity, BET_SERVICE_URL);
+            createUserInAnotherService(userEntity, TRANSACTION_SERVICE_URL);
         } catch (BetServiceNotAvailableException ex) {
             userService.deleteUser(userEntity);
             throw ex;
@@ -125,10 +129,9 @@ public class AuthServiceImpl implements AuthService{
     }
 
 
-    public void createUserInBetService(UserEntity userEntity) {
+    public void createUserInAnotherService(UserEntity userEntity, String url) {
         RestTemplate restTemplate = new RestTemplate();
-        String betServiceUrl = "http://bet-service:8081/api/betting/create-user";
-        log.info(betServiceUrl);
+        log.info(url);
 
         try {
             HttpHeaders headers = new HttpHeaders();
@@ -138,7 +141,7 @@ public class AuthServiceImpl implements AuthService{
 
             HttpEntity<String> requestEntity = new HttpEntity<>(userJson, headers);
 
-            restTemplate.exchange(betServiceUrl, HttpMethod.POST, requestEntity, String.class);
+            restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
 
         } catch (Exception e) {
             throw new BetServiceNotAvailableException("Не удалось получить ответ от сервиса бизнес логики");

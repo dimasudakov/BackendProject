@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+    transaction-service-db:
+        image: postgres:14-alpine
+        container_name: transaction-service-db
+        restart: on-failure
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: sudakovdimapos
+            POSTGRES_DB: transaction-service-db
+        ports:
+            - "6668:5432"
+        volumes:
+            - C:\Users\user\Desktop\data\transaction-service-db:/var/lib/postgresql/data
+
+    transaction-service:
+        container_name: transaction-service
+        ports:
+            - "8082:8082"
+
+        depends_on:
+            transaction-service-db:
+                condition: service_started
+
+        environment:
+            DB_HOST: transaction-service-db
+            DB_PORT: 5432
+
+        build:
+            context: ../
+            dockerfile: Dockerfile
